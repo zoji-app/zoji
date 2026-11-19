@@ -2,7 +2,7 @@ module.exports = {
   name: 'Zoji',
   slug: 'zoji',
   owner: 'm4rio.dev',
-  version: '1.10.7',
+  version: '1.10.8',
   scheme: 'zoji',
   orientation: 'portrait',
   icon: './assets/icon.png',
@@ -17,7 +17,7 @@ module.exports = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'dev.de4araujo.zoji',
-    buildNumber: '124',
+    buildNumber: '125',
     infoPlist: {
       UIBackgroundModes: ['remote-notification'],
     },
@@ -28,7 +28,7 @@ module.exports = {
       backgroundColor: '#16224D',
     },
     package: 'dev.de4araujo.zoji',
-    versionCode: 130,
+    versionCode: 131,
     googleServicesFile: './google-services.json',
     navigationBar: {
       backgroundColor: '#B8C7C7',
