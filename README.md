@@ -4,9 +4,12 @@ Aplicativo de bate-papo minimalista onde a comunicação acontece exclusivamente
 
 O código do app é aberto sob a [MPL-2.0](LICENSE). Quer ajudar? Comece pela [visão do projeto](VISION.md) e pelo [guia de contribuição](CONTRIBUTING.md).
 
-- **App Store:** https://apps.apple.com/br/app/zoji/id6762674303
-- **Bundle ID (iOS):** `dev.de4araujo.zoji`
-- **Package (Android):** `dev.de4araujo.zoji`
+|                              | iOS                                                          | Android                                                                         |
+| ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Loja**                     | [App Store](https://apps.apple.com/br/app/zoji/id6762674303) | [Google Play](https://play.google.com/store/apps/details?id=dev.de4araujo.zoji) |
+| **Identificador**            | Bundle ID `dev.de4araujo.zoji`                               | Package `dev.de4araujo.zoji`                                                    |
+| **Versão mínima do sistema** | iOS 16.4                                                     | Android 7.0 (API 24)                                                            |
+| **SDK alvo**                 | —                                                            | API 36 (`targetSdkVersion` e `compileSdkVersion`)                               |
 
 ---
 
@@ -94,6 +97,13 @@ npm run ios          # ou npm run android
 
 Em modo de desenvolvimento, o app usa o servidor falso de `dev-server/` e nunca a produção. Os detalhes estão no [CONTRIBUTING.md](CONTRIBUTING.md#rodando-o-app).
 
+**No Android**, antes do primeiro build:
+
+```bash
+cp google-services.example.json android/app/google-services.json   # Firebase de exemplo (push não funciona)
+echo "EXPO_PUBLIC_API_URL=http://10.0.2.2:8080" > .env               # no emulador, localhost é 10.0.2.2
+```
+
 ---
 
 ## Build de produção
@@ -103,11 +113,11 @@ Só o mantenedor publica versões, com as chaves de assinatura do projeto. A ver
 **iOS** — gerado localmente via Xcode:
 
 ```bash
-# Abrir no Xcode e fazer archive via Product > Archive
-open ios/Zoji.xcodeproj
+# Abrir o workspace (não o .xcodeproj) e fazer Product > Archive
+open ios/Zoji.xcworkspace
 ```
 
-**Android** — gerado localmente via Gradle:
+**Android** — gerado localmente via Gradle. Precisa do `android/keystore.properties` com a chave de upload e do `google-services.json` real do Firebase, que ficam só com o mantenedor:
 
 ```bash
 cd android

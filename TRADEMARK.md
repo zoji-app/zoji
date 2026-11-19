@@ -19,6 +19,7 @@ Se você publicar um fork, troque o nome, o ícone, o identificador do app (`dev
 ## Canais oficiais
 
 - App Store: https://apps.apple.com/br/app/zoji/id6762674303
+- Google Play: https://play.google.com/store/apps/details?id=dev.de4araujo.zoji
 - Site: https://zoji.app
 - Contato: contato@zoji.app
 
