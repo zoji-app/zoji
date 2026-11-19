@@ -1,0 +1,29 @@
+name: Ideia ou recurso novo
+description: Sugira uma melhoria. Leia o VISION.md antes.
+labels: ['ideia']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Qual problema isso resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: O que você propõe?
+    validations:
+      required: true
+  - type: checkboxes
+    id: vision
+    attributes:
+      label: Visão do projeto
+      options:
+        - label: Li o VISION.md e a ideia combina com os princípios do Zoji.
+          required: true
+        - label: A ideia não coleta nem envia dados pessoais novos (se coletar, explique acima).
+  - type: dropdown
+    id: help
+    attributes:
+      label: Você quer implementar?
+      options: ['Sim', 'Talvez, com ajuda', 'Não, só a sugestão']

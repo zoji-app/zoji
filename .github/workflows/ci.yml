@@ -1,0 +1,71 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  # ─── Job 1: Qualidade ────────────────────────────────────────────────────────
+  quality-check:
+    name: Quality Check
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Verificar tipagem TypeScript
+        run: npm run type-check
+
+      - name: Executar ESLint
+        run: npm run lint
+
+      - name: Verificar formatação Prettier
+        run: npm run format:check
+
+  # ─── Job 2: Testes unitários ─────────────────────────────────────────────────
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-24.04
+    needs: quality-check
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Executar testes unitários
+        run: npm run test:ci
+
+      - name: Guardar relatório de cobertura
+        uses: actions/upload-artifact@v7
+        continue-on-error: true
+        with:
+          name: coverage-report
+          path: coverage/
+
+  # ─── Jobs de build e deploy (ativar quando EAS/Expo estiver configurado) ──────
+  # build-android, build-ios, deploy-ota: adicionar quando EXPO_TOKEN estiver
+  # configurado nos secrets do repositório.

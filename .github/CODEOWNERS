@@ -1,0 +1,16 @@
+# Toda mudança precisa da aprovação do mantenedor. Ao migrar para a
+# organização, troque o usuário abaixo se for preciso.
+*                       @m4riodev
+
+# Exigem atenção redobrada na revisão (segurança, dados e publicação).
+/.github/               @m4riodev
+/package.json           @m4riodev
+/package-lock.json      @m4riodev
+/app.config.js          @m4riodev
+/ios/                   @m4riodev
+/android/               @m4riodev
+/src/services/          @m4riodev
+/src/i18n/              @m4riodev
+/LICENSE                @m4riodev
+/VISION.md              @m4riodev
+/GOVERNANCE.md          @m4riodev
