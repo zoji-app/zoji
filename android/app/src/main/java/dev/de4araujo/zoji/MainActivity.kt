@@ -1,5 +1,6 @@
 package dev.de4araujo.zoji
 
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import androidx.core.view.WindowCompat
@@ -18,15 +19,18 @@ class MainActivity : ReactActivity() {
     // This is required for expo-splash-screen.
     setTheme(R.style.AppTheme);
     super.onCreate(null)
-    // Edge-to-edge sobrescreve isAppearanceLightStatusBars/NavigationBars do tema.
-    // Força ícones escuros explicitamente após o setup do edge-to-edge.
+    // Barras transparentes (edge-to-edge, ligado pelo RN via edgeToEdgeEnabled):
+    // o fundo de cada tela aparece atrás delas. NÃO fixar window.statusBarColor
+    // aqui — no Android ≤ 14 isso pinta a barra com cor sólida (era o #B8C7C7
+    // antigo); no 15+ o sistema ignora, por isso só aparecia em alguns aparelhos.
+    // A cor dos ícones vem do JS conforme o tema (statusBarStyle no Stack e
+    // NavigationBar.setStyle); aqui só o valor inicial, até o JS carregar.
+    val isNight = (resources.configuration.uiMode and
+        Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     WindowCompat.getInsetsController(window, window.decorView).apply {
-      isAppearanceLightStatusBars = true
-      isAppearanceLightNavigationBars = true
+      isAppearanceLightStatusBars = !isNight
+      isAppearanceLightNavigationBars = !isNight
     }
-    // Fixa cor da barra de status para evitar o scrim escuro automático do Android
-    // sobre fundo transparente. Sem isso os ícones ficam brancos sobre fundo escuro.
-    window.statusBarColor = getColor(R.color.surface)
   }
 
   /**

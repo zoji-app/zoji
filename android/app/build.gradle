@@ -101,8 +101,8 @@ android {
         applicationId "dev.de4araujo.zoji"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 131
-        versionName "1.10.8"
+        versionCode 132
+        versionName "1.10.9"
 
         // SDK 57: MainApplication.kt (ExpoReactHostFactory/DefaultNewArchitectureEntryPoint)
         // lê esse campo pra definir o releaseLevel da New Architecture.
